@@ -315,13 +315,17 @@ public class RecyclerViewDragDropManager implements DraggableItemConstants {
             throw new IllegalArgumentException("The passed adapter does not support stable IDs");
         }
 
+        setWrappedAdapter(new DraggableItemWrapperAdapter(this, adapter));
+
+        return mWrapperAdapter;
+    }
+
+    public void setWrappedAdapter (@NonNull DraggableItemWrapperAdapter adapter) {
         if (mWrapperAdapter != null) {
             throw new IllegalStateException("already have a wrapped adapter");
         }
 
-        mWrapperAdapter = new DraggableItemWrapperAdapter(this, adapter);
-
-        return mWrapperAdapter;
+        mWrapperAdapter = adapter;
     }
 
     /**
